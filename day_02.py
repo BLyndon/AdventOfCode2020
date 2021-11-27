@@ -1,6 +1,3 @@
-from typing import Counter
-
-
 def loader(filename):
     with open('./puzzles/'+filename) as file:
         lines = file.readlines()
