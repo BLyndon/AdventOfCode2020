@@ -1,6 +1,3 @@
-from functools import reduce
-
-
 def loader(filename):
     with open('./puzzles/'+filename) as file:
         text = file.read()
