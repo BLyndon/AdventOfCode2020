@@ -1,4 +1,3 @@
-import re
 import networkx as nx
 
 
@@ -21,14 +20,13 @@ def parser(lines):
     for line in lines:
         line = line.replace("\n", "").replace("bags", "").replace(
             "bag", "")
-        if line.endswith("no other bags."):
-            content = ['no bags']
+        if line.endswith("no other ."):
+            content = [['no bags', 0]]
         else:
             line = line.replace(' , ', "-").replace(" .", "").strip()
-
             content = line.split("contain ")[1].split("-")
             content = list(map(lambda x: [
-                " ".join(x.split()[1:]), x.split()[0]], content))
+                " ".join(x.split()[1:]), int(x.split()[0])], content))
         bag = line.split("contain")[0].strip()
 
         bags[bag] = content
@@ -37,12 +35,12 @@ def parser(lines):
 
 
 def solver_1(edges):
-    edges = [(edge[0], edge[1]) for edge in edges]
+    edges1 = [(edge[0], edge[1]) for edge in edges]
     G = nx.DiGraph()
-    G.add_edges_from(edges)
+    G.add_edges_from(edges1)
 
     target = 'shiny gold'
-    sources = list({edge[0] for edge in edges})
+    sources = list({edge[0] for edge in edges1})
 
     container = set()
     for source in sources:
@@ -52,7 +50,7 @@ def solver_1(edges):
     return len(container)
 
 
-def solver_2(lines):
+def solver_2(edges):
     pass
 
 
